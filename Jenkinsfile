@@ -66,6 +66,7 @@ pipeline{
                     }
                     steps {
                         container('kubectl') {
+                            sh "cat deployment.yaml"
                             step([$class: 'KubernetesDeploy', authMethod: 'certs', apiServerUrl: 'https://kubernetes.default.svc.cluster.local:443', credentialsId:'k8sCertAuth', config: 'deployment.yaml',variableState: 'ORIGIN_REPO,REPO,IMAGE_TAG'])
                         }
                     }
